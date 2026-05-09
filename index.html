@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title>For My BBG 🌸</title>
+<title>For You 🌸</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -30,27 +30,8 @@ body{
   color:var(--ink);
   min-height:100vh;
   overflow-x:hidden;
-  cursor:none;
+  cursor:default;
 }
-
-/* ── cursor ── */
-#cursor{
-  position:fixed;width:8px;height:8px;
-  background:var(--rose2);border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:width .2s,height .2s,background .2s;
-  mix-blend-mode:difference;
-}
-#cursor-ring{
-  position:fixed;width:32px;height:32px;
-  border:1px solid rgba(232,160,180,0.45);
-  border-radius:50%;pointer-events:none;z-index:9998;
-  transform:translate(-50%,-50%);
-  transition:width .25s,height .25s,border-color .25s;
-}
-body.hovering #cursor{width:14px;height:14px;background:var(--rose3);}
-body.hovering #cursor-ring{width:50px;height:50px;border-color:rgba(196,96,122,0.7);}
 
 /* noise */
 body::before{
@@ -122,12 +103,6 @@ body::before{
 
 /* section labels */
 .section-eyebrow{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--rose2);margin-bottom:12px;}
-.section-heading{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(28px,9vw,40px);font-weight:300;line-height:1.25;
-  color:var(--ink);margin-bottom:28px;
-}
-.section-heading em{font-style:italic;color:var(--rose2);}
 
 /* ── LETTER ── */
 .letter-wrap{position:relative;width:100%;max-width:360px;}
@@ -152,7 +127,7 @@ body::before{
 .letter-body p:last-child{margin-bottom:0;}
 .letter-sig{font-family:'Great Vibes',cursive;font-size:28px;color:var(--rose2);text-align:right;margin-top:22px;}
 
-/* ── INTERACTIVE APOLOGY ── */
+/* ── INTERACTIVE ── */
 #apology-scene{background:transparent;}
 
 .mood-label{
@@ -168,7 +143,7 @@ body::before{
 .mood-q em{font-style:italic;color:var(--rose2);}
 .mood-sub{
   font-size:13px;font-weight:300;color:var(--muted);
-  margin-bottom:32px;line-height:1.7;max-width:260px;
+  margin-bottom:32px;line-height:1.7;max-width:280px;
 }
 
 /* anger meter */
@@ -214,7 +189,7 @@ body::before{
   transition:opacity .3s;
 }
 
-/* apology actions */
+/* action buttons */
 .actions-grid{
   display:grid;grid-template-columns:1fr 1fr;
   gap:10px;width:100%;max-width:320px;
@@ -227,15 +202,10 @@ body::before{
   padding:14px 12px;
   font-family:'Cormorant Garamond',serif;
   font-style:italic;font-size:14px;
-  color:var(--ink);cursor:none;
+  color:var(--ink);cursor:pointer;
   transition:border-color .25s,background .25s,transform .15s,opacity .3s;
   line-height:1.4;
   position:relative;overflow:hidden;
-}
-.act-btn::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 50%,rgba(196,96,122,0),rgba(196,96,122,0));
-  transition:background .4s;
 }
 .act-btn:hover{border-color:var(--rose2);background:#2a1018;}
 .act-btn:active{transform:scale(0.97);}
@@ -294,7 +264,7 @@ body::before{
   padding:16px 40px;
   font-family:'Jost',sans-serif;font-weight:300;font-size:13px;
   letter-spacing:0.18em;text-transform:uppercase;
-  cursor:none;
+  cursor:pointer;
   transition:background .3s,transform .15s,box-shadow .3s;
   box-shadow:0 0 0 0 rgba(196,96,122,0);
   position:relative;overflow:hidden;
@@ -315,12 +285,12 @@ body::before{
   padding:10px 22px;
   font-family:'Jost',sans-serif;font-weight:300;
   font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
-  border-radius:1px;cursor:none;
+  border-radius:1px;cursor:pointer;
   transition:border-color .2s,font-size .3s,padding .3s,opacity .4s;
   white-space:nowrap;
 }
 
-/* ── AFTERMATH ── */
+/* aftermath */
 #aftermath{
   display:none;
   flex-direction:column;align-items:center;gap:16px;
@@ -340,7 +310,7 @@ body::before{
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .85s ease,transform .85s ease;}
 .reveal.vis{opacity:1;transform:translateY(0);}
 
-/* snark */
+/* snark toast */
 #snark{
   position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);
   background:linear-gradient(135deg,#1e0f14,#140810);
@@ -354,11 +324,25 @@ body::before{
   box-shadow:0 8px 40px rgba(0,0,0,.55);
 }
 #snark.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+/* milestone toast */
+.milestone-toast{
+  position:fixed;top:28px;left:50%;
+  transform:translateX(-50%) translateY(-80px);
+  background:linear-gradient(135deg,#1e0f14,#2a0f18);
+  border:1px solid rgba(232,160,180,0.45);
+  padding:12px 22px;border-radius:1px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;
+  color:var(--ink);z-index:600;
+  white-space:nowrap;opacity:0;
+  transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .4s;
+  pointer-events:none;
+  box-shadow:0 8px 40px rgba(0,0,0,.55);
+}
+.milestone-toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
 </style>
 </head>
 <body>
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
 <canvas id="particles"></canvas>
 <div class="blob blob1"></div>
 <div class="blob blob2"></div>
@@ -381,96 +365,98 @@ body::before{
   <p class="section-eyebrow reveal">dari hati yang paling dalam</p>
   <div class="letter-wrap reveal">
     <div class="letter-paper">
-      <p class="letter-date">Mei 2026 &ensp;·&ensp; Patna, India</p>
+      <p class="letter-date">May 2026 &ensp;·&ensp; Patna, India</p>
       <div class="letter-body">
         <p>Baby girl,</p>
-        <p>Kamu tau nggak sih, betapa bodohnya aku ngerasa sekarang? Udah bikin kamu marah — orang yang paling aku sayang. Beneran deh, nggak ada yang lebih aku sesalin dari ini.</p>
-        <p>Kamu tuh bukan cuma pacar aku. Kamu tuh bagian dari hal-hal yang bikin aku pengen bangun tiap pagi. Jarak yang jauh itu udah berat, dan bukannya bikin segalanya lebih ringan, aku malah nambahin beban. Maafin aku, ya?</p>
-        <p>Aku kangen kamu. Kangen suara kamu. Kangen dimarahin kamu juga, kalau jujur. Tapi yang paling aku mau sekarang adalah kamu tau — kamu selalu jadi prioritas aku, bahkan dari seberang lautan ini.</p>
+        <p>Aku tau belakangan ini ada banyak hal yang berat antara kita, dan aku tau aku juga ikut nambahin beban itu. Aku terlalu banyak mikir, gampang reaktif, dan kadang bikin segalanya makin susah bukannya lebih ringan. Aku beneran minta maaf untuk itu.</p>
+        <p>Tapi aku masih peduli sama kamu, dalam banget. Itu nggak pernah berubah.</p>
+        <p>Aku kangen ngobrol sama kamu kayak biasa. Kangen ketawa bareng kamu. Kangen ngerasa deket sama kamu tanpa semua stress yang ada di antara kita.</p>
+        <p>Aku nggak bikin ini buat maksa kamu atau ngepush apa pun. Aku cuma mau bikin sesuatu yang lembut dan jujur, yang semoga bisa bikin kamu senyum sedikit. 🌸</p>
+        <p>Dan jujur aja… bahkan setelah semua ini, kamu masih terasa spesial buat aku.</p>
       </div>
       <p class="letter-sig">— AJ 🌸</p>
     </div>
   </div>
 </section>
 
-<!-- ═══ INTERACTIVE APOLOGY ═══ -->
+<!-- ═══ INTERACTIVE ═══ -->
 <section class="scene" id="apology-scene">
   <div class="ornament reveal"><div class="ornament-line"></div><div class="ornament-gem"></div><div class="ornament-line"></div></div>
 
   <div id="apologyFlow" style="width:100%;display:flex;flex-direction:column;align-items:center;">
     <p class="mood-label reveal">interaktif · jujur · dari aku</p>
-    <p class="mood-q reveal">Seberapa marah kamu<br><em>sekarang?</em></p>
-    <p class="mood-sub reveal">Bantu aku tau — biar aku bisa berusaha lebih keras.</p>
+    <p class="mood-q reveal">Bisa kita ngerasa sedikit<br><em>lebih deket lagi?</em></p>
+    <p class="mood-sub reveal">Aku tau belakangan ini berat. Aku cuma mau bikin kamu senyum sebentar. 🌸</p>
 
-    <!-- anger meter -->
+    <!-- comfort meter -->
     <div class="meter-wrap reveal" id="angerMeter">
-      <p class="meter-title">Tingkat Marahnya</p>
-      <div class="meter-emoji" id="meterEmoji">😤</div>
+      <p class="meter-title">Tingkat Kenyamanan</p>
+      <div class="meter-emoji" id="meterEmoji">🥺</div>
       <div class="meter-track"><div class="meter-fill" id="meterFill"></div></div>
-      <div class="meter-labels"><span>Udah lega</span><span>Masih kesel</span><span>Marah banget</span></div>
-      <p class="meter-state" id="meterState">Masih kesel ya sama aku… 🥺</p>
+      <div class="meter-labels"><span>Udah nyaman</span><span>Mulai melunak</span><span>Masih jauh</span></div>
+      <p class="meter-state" id="meterState">Masih sedikit jauh dari aku… 🥺</p>
     </div>
 
-    <!-- forgiveness progress -->
+    <!-- reconnect meter -->
     <div class="forgive-track reveal" id="forgiveTrack">
-      <p class="forgive-label">Tingkat Dimaafkan</p>
+      <p class="forgive-label">Meter Kedekatan</p>
       <div class="forgive-bar-wrap"><div class="forgive-bar" id="forgiveBar"></div></div>
       <p class="forgive-pct" id="forgiveNum">0%</p>
     </div>
 
     <!-- action buttons -->
-    <p style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;" class="reveal">Pilih satu untuk mengurangi amarahmu</p>
+    <p style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;" class="reveal">hal kecil yang mengingatkan aku tentang kita</p>
     <div class="actions-grid reveal" id="actionsGrid">
-      <button class="act-btn" data-val="20" data-snark="Aku bakal inget ini selamanya 🥺" onclick="doAction(this)">
+      <button class="act-btn" data-val="20" data-snark="Aku masih beneran ngerasain itu 🌸" onclick="doAction(this)">
         <span class="act-icon">💌</span>
-        Baca suratnya lagi
-        <span class="act-label">+20% maaf</span>
+        Baca sesuatu yang masih aku rasain
+        <span class="act-label">+20% deket</span>
       </button>
-      <button class="act-btn" data-val="18" data-snark="Kamu manis banget sih 🌸" onclick="doAction(this)">
+      <button class="act-btn" data-val="18" data-snark="Kenangan itu masih terasa lembut 🥺" onclick="doAction(this)">
         <span class="act-icon">🌸</span>
-        Bayangin lagi pelukan kita
-        <span class="act-label">+18% maaf</span>
+        Inget satu momen lembut kita
+        <span class="act-label">+18% deket</span>
       </button>
-      <button class="act-btn" data-val="25" data-snark="Makasih udah percaya lagi… 💕" onclick="doAction(this)">
+      <button class="act-btn" data-val="25" data-snark="Makasih udah tetep di sini 🌙" onclick="doAction(this)">
         <span class="act-icon">🤝</span>
-        Percaya sama AJ-mu
-        <span class="act-label">+25% maaf</span>
+        Percaya sama aku sedikit lagi
+        <span class="act-label">+25% deket</span>
       </button>
-      <button class="act-btn" data-val="15" data-snark="Ketawa dulu, marah belakangan 😊" onclick="doAction(this)">
+      <button class="act-btn" data-val="15" data-snark="Oke kita emang cute banget 😭" onclick="doAction(this)">
         <span class="act-icon">😂</span>
-        Inget momen lucu kita
-        <span class="act-label">+15% maaf</span>
+        Akuin kita emang lucu banget
+        <span class="act-label">+15% deket</span>
       </button>
-      <button class="act-btn" data-val="22" data-snark="Itu sih udah cukup bikin aku luluh 🥹" onclick="doAction(this)">
+      <button class="act-btn" data-val="22" data-snark="Aku kangen ngobrol malem sama kamu 💕" onclick="doAction(this)">
         <span class="act-icon">📞</span>
-        Inget kapan kita telponan
-        <span class="act-label">+22% maaf</span>
+        Inget telpon malem kita
+        <span class="act-label">+22% deket</span>
       </button>
-      <button class="act-btn" data-val="30" data-snark="Oke fine… kamu yang terbaik 🖤" onclick="doAction(this)">
+      <button class="act-btn" data-val="30" data-snark="Tetep di sini sama aku ya 🌸" onclick="doAction(this)">
         <span class="act-icon">🌙</span>
-        Akui AJ emang lucu
-        <span class="act-label">+30% maaf</span>
+        Temani aku sebentar lagi
+        <span class="act-label">+30% deket</span>
       </button>
     </div>
 
-    <!-- final question appears after enough progress -->
+    <!-- unlocks at 70% -->
     <div id="final-question">
-      <p class="q-final">Jadi…<br><em>udah mau maafin aku?</em></p>
-      <p class="q-sub-final">Aku janji nggak kemana-mana. 🌸</p>
-      <button class="btn-yes" id="yesBtn">Iya, aku maafin kamu 💕</button>
-      <div id="noZone"><button id="noBtn" data-tries="0">Belum deh</button></div>
+      <p class="q-final">Bisa kita pelan-pelan<br><em>deket lagi?</em></p>
+      <p class="q-sub-final">Nggak ada paksaan. Aku cuma kangen kita. 🌸</p>
+      <button class="btn-yes" id="yesBtn">Sini, bodoh 💕</button>
+      <div id="noZone"><button id="noBtn" data-tries="0">Masih mikir 😤</button></div>
     </div>
   </div>
 
   <!-- aftermath -->
   <div id="aftermath">
     <div class="heart-burst">🌸</div>
-    <p class="aftermath-title">Makasih, Babe.</p>
-    <p class="aftermath-body">Kamu nggak tau betapa berartinya ini buat aku. Aku sayang kamu — lebih dari yang bisa aku ungkapin. Selalu.</p>
-    <p class="aftermath-sig">— AJ, selalu punyamu 🖤</p>
+    <p class="aftermath-title">Makasih, sayang.</p>
+    <p class="aftermath-body">Aku tau semuanya belum langsung sempurna, tapi aku beneran bersyukur kamu mau tetep di sini sama aku sebentar. 🌙</p>
+    <p class="aftermath-sig">— AJ 🖤</p>
     <a id="waBtn" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:10px;margin-top:8px;background:transparent;border:1px solid rgba(232,160,180,0.4);border-radius:1px;padding:13px 28px;font-family:'Jost',sans-serif;font-weight:300;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--rose2);text-decoration:none;transition:border-color .25s,background .25s;">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Kasih tau AJ sekarang
+      Let AJ know 🌸
     </a>
   </div>
 </section>
@@ -478,143 +464,121 @@ body::before{
 <div id="snark"></div>
 
 <script>
-// cursor
-const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
-let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
-document.querySelectorAll('button,a').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
-});
-
-// particles
+// ── PARTICLES ──
 const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
 let W,H,pts=[];
 function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
 resize();window.addEventListener('resize',resize);
 function mkP(){return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.3,vx:(Math.random()-.5)*.15,vy:-(Math.random()*.2+.05),a:Math.random()*.5+.1,life:Math.random()};}
 for(let i=0;i<80;i++)pts.push(mkP());
-(function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.life+=.003;if(p.life>1||p.y<-10){Object.assign(p,mkP());p.y=H+10;}const a=p.a*Math.sin(p.life*Math.PI);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,160,180,${a})`;ctx.fill();});requestAnimationFrame(draw);})();
+(function draw(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;p.life+=.003;
+    if(p.life>1||p.y<-10){Object.assign(p,mkP());p.y=H+10;}
+    const a=p.a*Math.sin(p.life*Math.PI);
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(232,160,180,${a})`;ctx.fill();
+  });
+  requestAnimationFrame(draw);
+})();
 
-// reveal
+// ── SCROLL REVEAL ──
 const revs=document.querySelectorAll('.reveal');
-const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:.1});
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});
+},{threshold:.1});
 revs.forEach(el=>ro.observe(el));
 
-// snark
+// ── SNARK TOAST ──
 const snarkEl=document.getElementById('snark');
-function showSnark(msg){snarkEl.textContent=msg;snarkEl.classList.add('show');clearTimeout(snarkEl._t);snarkEl._t=setTimeout(()=>snarkEl.classList.remove('show'),3400);}
+function showSnark(msg){
+  snarkEl.textContent=msg;snarkEl.classList.add('show');
+  clearTimeout(snarkEl._t);
+  snarkEl._t=setTimeout(()=>snarkEl.classList.remove('show'),3400);
+}
 
-// ── ANGER / FORGIVE METER ──
-let angerPct=85; // starts high
-let forgivePct=0;
-let actionsUsed=0;
-const totalActions=6;
+// ── MILESTONE TOAST ──
+function showMilestone(msg){
+  const m=document.createElement('div');
+  m.className='milestone-toast';
+  m.textContent=msg;
+  document.body.appendChild(m);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>m.classList.add('show')));
+  setTimeout(()=>{m.classList.remove('show');setTimeout(()=>m.remove(),500);},3800);
+}
 
+// ── METERS ──
+let angerPct=85,forgivePct=0,actionsUsed=0;
 const meterFill=document.getElementById('meterFill');
 const meterEmoji=document.getElementById('meterEmoji');
 const meterState=document.getElementById('meterState');
 const forgiveBar=document.getElementById('forgiveBar');
 const forgiveNum=document.getElementById('forgiveNum');
+const milestones={25:false,50:false,70:false};
 
-const angerStates=[
-  {max:15, emoji:'😊', state:'Kamu udah luluh… 💕', fill:'15%'},
-  {max:30, emoji:'🥺', state:'Masih sedikit kesel ya…', fill:'28%'},
-  {max:50, emoji:'😕', state:'Lumayan lah… aku usaha terus', fill:'48%'},
-  {max:70, emoji:'😤', state:'Masih kesel ya sama aku… 🥺', fill:'65%'},
-  {max:100, emoji:'😠', state:'Marah banget nih… aku minta maaf 😔', fill:'85%'},
+const comfortStates=[
+  {max:15,emoji:'😊',state:'You\'re feeling a little softer now… 💕'},
+  {max:30,emoji:'🥺',state:'Getting a little closer…'},
+  {max:50,emoji:'😕',state:'Still a little distant, but warming up'},
+  {max:70,emoji:'😔',state:'Still a little distant from me… 🥺'},
+  {max:100,emoji:'🥺',state:'Still a little distant from me… 🥺'},
 ];
 
 function updateMeters(){
+  const st=comfortStates.find(s=>angerPct<=s.max)||comfortStates[comfortStates.length-1];
+  meterFill.style.width=Math.max(5,angerPct)+'%';
+  meterEmoji.textContent=st.emoji;
+  meterState.textContent=st.state;
+  forgiveBar.style.width=forgivePct+'%';
+  forgiveNum.textContent=Math.round(forgivePct)+'%';
+  if(forgivePct>10) forgiveBar.classList.add('glowing');
 
-  // anger
-  const state =
-    angerStates.find(s => angerPct <= s.max)
-    || angerStates[angerStates.length - 1];
+  // milestones
+  if(forgivePct>=25&&!milestones[25]){milestones[25]=true;showMilestone('💌 She\'s starting to feel a little closer…');}
+  if(forgivePct>=50&&!milestones[50]){milestones[50]=true;showMilestone('🌸 Halfway there — she\'s warming up!');}
+  if(forgivePct>=70&&!milestones[70]){milestones[70]=true;showMilestone('💕 Almost there… the final question is unlocking.');}
 
-  meterFill.style.width = Math.max(5, angerPct) + '%';
-
-  meterEmoji.textContent = state.emoji;
-
-  meterState.textContent = state.state;
-
-
-  // forgive
-  forgiveBar.style.width = forgivePct + '%';
-
-  forgiveNum.textContent =
-    Math.round(forgivePct) + '%';
-
-  if(forgivePct > 10){
-    forgiveBar.classList.add('glowing');
-  }
-
-
-  // SHOW FINAL QUESTION
-  const fq = document.getElementById('final-question');
-
-  if(forgivePct >= 70 && fq.style.display !== 'flex'){
-
+  // unlock final question
+  const fq=document.getElementById('final-question');
+  if(forgivePct>=70&&fq.style.display!=='flex'){
     setTimeout(()=>{
-
-      fq.style.display = 'flex';
-
-      fq.style.flexDirection = 'column';
-
-      fq.style.alignItems = 'center';
-
-      fq.style.animation =
-        'fadeUp .8s ease forwards';
-
-      showSnark('Udah 70%… gimana? 🌸');
-
-      // center NO button
+      fq.style.display='flex';
+      fq.style.flexDirection='column';
+      fq.style.alignItems='center';
+      fq.style.animation='fadeUp .8s ease forwards';
+      showSnark('Almost there… 🌸');
       setTimeout(()=>{
-
         const z=document.getElementById('noZone');
-
         const nb=document.getElementById('noBtn');
-
-        nb.style.left =
-          (z.offsetWidth/2 - nb.offsetWidth/2)+'px';
-
-        nb.style.top =
-          (z.offsetHeight/2 - nb.offsetHeight/2)+'px';
-
+        nb.style.left=(z.offsetWidth/2-nb.offsetWidth/2)+'px';
+        nb.style.top=(z.offsetHeight/2-nb.offsetHeight/2)+'px';
       },100);
-
     },500);
   }
 }
 updateMeters();
 
 function doAction(btn){
+  if(btn.classList.contains('used'))return;
   const val=parseInt(btn.getAttribute('data-val'));
   const snarkMsg=btn.getAttribute('data-snark');
   btn.classList.add('used');
   actionsUsed++;
-  // reduce anger
   angerPct=Math.max(0,angerPct-val*0.7);
-  // increase forgive
   forgivePct=Math.min(100,forgivePct+val);
   updateMeters();
   showSnark(snarkMsg);
-  // if all used and not yet 70, still bump
-  if(actionsUsed===totalActions && forgivePct<70){
-    forgivePct=72;
-    angerPct=20;
-    updateMeters();
-  }
+  if(actionsUsed===6&&forgivePct<70){forgivePct=72;angerPct=20;updateMeters();}
 }
 
 // ── NO BUTTON ──
-const noLabels=['Belum deh','Hmm… masih belum','Coba lagi 😤','Nggak mau!','…'];
+const noLabels=['Still processing 😤','Hmm… not yet','Stop it 😤','I said no!','…'];
 const noSnarks=[
-  'Tombolnya kabur terus lho 👀',
-  'Aku sabar kok, nunggu kamu…',
-  'Tombolnya makin kecil, perhatiin 😏',
-  'Oke fine, aku nunggu selamanya kalau perlu 🥺',
+  'The button keeps running away 👀',
+  'I\'ll wait. I\'ve been waiting anyway…',
+  'It\'s getting smaller, just saying 😏',
+  'I’m not going anywhere anytime soon 🌸',
 ];
 let noTries=0,snarkIdx=0;
 const noBtn=document.getElementById('noBtn');
@@ -634,19 +598,19 @@ noBtn.addEventListener('mouseenter',()=>{
   if(isMobile())return;
   noTries++;
   noBtn.setAttribute('data-tries',Math.min(noTries,4));
-  if(noTries<noLabels.length) noBtn.textContent=noLabels[noTries];
+  if(noTries<noLabels.length)noBtn.textContent=noLabels[noTries];
   moveNo();
-  if(snarkIdx<noSnarks.length) showSnark(noSnarks[snarkIdx++]);
+  if(snarkIdx<noSnarks.length)showSnark(noSnarks[snarkIdx++]);
 });
 noBtn.addEventListener('click',()=>{
   if(!isMobile())return;
   noTries++;
   noBtn.setAttribute('data-tries',Math.min(noTries,4));
-  if(noTries<noLabels.length) noBtn.textContent=noLabels[noTries];
-  if(snarkIdx<noSnarks.length) showSnark(noSnarks[snarkIdx++]);
+  if(noTries<noLabels.length)noBtn.textContent=noLabels[noTries];
+  if(snarkIdx<noSnarks.length)showSnark(noSnarks[snarkIdx++]);
   if(noTries>=4){noBtn.style.opacity='0';setTimeout(()=>noBtn.style.display='none',500);}
 });
-// shrink styles
+
 const noCss=document.createElement('style');
 noCss.textContent=`
 #noBtn[data-tries="1"]{font-size:11px;padding:8px 18px;}
@@ -656,48 +620,18 @@ noCss.textContent=`
 `;
 document.head.appendChild(noCss);
 
-
-const AJ_WA_NUMBER = '917667849304';
-const WA_MESSAGE = encodeURIComponent('Iya, i forgive you 💕🌸');
-document.getElementById('waBtn').href = `https://wa.me/${AJ_WA_NUMBER}?text=${WA_MESSAGE}`;
-
-// ── MILESTONES ──
-const milestones = {25: false, 50: false, 70: false, 100: false};
-function checkMilestones(){
-  if(forgivePct>=25 && !milestones[25]){ milestones[25]=true; showMilestone(25); }
-  if(forgivePct>=50 && !milestones[50]){ milestones[50]=true; showMilestone(50); }
-  if(forgivePct>=70 && !milestones[70]){ milestones[70]=true; showMilestone(70); }
-}
-function showMilestone(pct){
-  const msgs = {
-    25: '💌 Dia udah mulai luluh sedikit…',
-    50: '🌸 Setengah jalan — dia lagi melunak!',
-    70: '💕 70%! Final question muncul sekarang…',
-  };
-  // show a special gold milestone toast
-  const m = document.createElement('div');
-  m.textContent = msgs[pct] || '';
-  m.style.cssText=`position:fixed;top:28px;left:50%;transform:translateX(-50%) translateY(-80px);background:linear-gradient(135deg,#1e0f14,#2a0f18);border:1px solid rgba(232,160,180,0.45);padding:12px 22px;border-radius:1px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--ink,#f5eaed);z-index:600;white-space:nowrap;opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .4s;pointer-events:none;box-shadow:0 8px 40px rgba(0,0,0,.55);`;
-  document.body.appendChild(m);
-  requestAnimationFrame(()=>{
-    m.style.transform='translateX(-50%) translateY(0)';
-    m.style.opacity='1';
-  });
-  setTimeout(()=>{
-    m.style.transform='translateX(-50%) translateY(-80px)';
-    m.style.opacity='0';
-    setTimeout(()=>m.remove(),500);
-  },3600);
-}
+// ── WHATSAPP ──
+const AJ_WA_NUMBER='917667849304';
+const WA_MESSAGE=encodeURIComponent('Iya, i love you stupid 💕🌸');
+document.getElementById('waBtn').href=`https://wa.me/${AJ_WA_NUMBER}?text=${WA_MESSAGE}`;
 
 // ── YES ──
 document.getElementById('yesBtn').onclick=()=>{
   document.getElementById('apologyFlow').style.display='none';
   const af=document.getElementById('aftermath');
   af.style.display='flex';
-  burst(70);
-  // update WA link one more time just in case
   document.getElementById('waBtn').href=`https://wa.me/${AJ_WA_NUMBER}?text=${WA_MESSAGE}`;
+  burst(70);
 };
 
 function burst(n){
