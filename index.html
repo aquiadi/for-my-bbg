@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>For My BBG 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+
+:root{
+  --bg:#0f080a;
+  --bg2:#180b0f;
+  --bg3:#200e14;
+  --rose:#c4607a;
+  --rose2:#e8a0b4;
+  --rose3:#fbd8e2;
+  --blush:#f5c8d4;
+  --gold:#d4a0b0;
+  --ink:#f5eaed;
+  --muted:#9a7a82;
+  --border:rgba(232,160,180,0.18);
+  --border2:rgba(232,160,180,0.32);
+}
+
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ── cursor ── */
+#cursor{
+  position:fixed;width:8px;height:8px;
+  background:var(--rose2);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,background .2s;
+  mix-blend-mode:difference;
+}
+#cursor-ring{
+  position:fixed;width:32px;height:32px;
+  border:1px solid rgba(232,160,180,0.45);
+  border-radius:50%;pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width .25s,height .25s,border-color .25s;
+}
+body.hovering #cursor{width:14px;height:14px;background:var(--rose3);}
+body.hovering #cursor-ring{width:50px;height:50px;border-color:rgba(196,96,122,0.7);}
+
+/* noise */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.03;pointer-events:none;z-index:1000;
+}
+
+/* blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;animation:blobFloat ease-in-out infinite;}
+.blob1{width:420px;height:420px;background:radial-gradient(circle,rgba(196,96,122,0.14),transparent 70%);top:-100px;left:-120px;animation-duration:18s;}
+.blob2{width:320px;height:320px;background:radial-gradient(circle,rgba(232,160,180,0.09),transparent 70%);bottom:8%;right:-90px;animation-duration:23s;animation-delay:-8s;}
+.blob3{width:260px;height:260px;background:radial-gradient(circle,rgba(196,96,122,0.07),transparent 70%);top:45%;left:15%;animation-duration:16s;animation-delay:-4s;}
+@keyframes blobFloat{
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%{transform:translate(18px,-28px) scale(1.07);}
+  66%{transform:translate(-14px,18px) scale(0.94);}
+}
+
+#particles{position:fixed;inset:0;z-index:1;pointer-events:none;}
+
+.scene{
+  position:relative;z-index:2;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:60px 32px;
+  text-align:center;
+}
+
+/* ── INTRO ── */
+.intro-line{
+  font-family:'Jost',sans-serif;font-weight:200;font-size:11px;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--rose2);opacity:0;
+  animation:fadeUp .8s ease .3s forwards;
+}
+.intro-name{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(64px,18vw,90px);
+  color:var(--ink);line-height:1.1;margin:8px 0 16px;
+  opacity:0;animation:fadeUp .9s ease .7s forwards;
+}
+.intro-tagline{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:300;
+  font-size:clamp(16px,5vw,20px);
+  color:var(--muted);opacity:0;animation:fadeUp .8s ease 1.1s forwards;
+  max-width:300px;line-height:1.65;
+}
+.scroll-line{
+  margin-top:56px;opacity:0;
+  animation:fadeUp .8s ease 1.6s forwards;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.scroll-line span{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);}
+.scroll-bar{
+  width:1px;height:48px;
+  background:linear-gradient(to bottom,var(--rose2),transparent);
+  animation:scrollPulse 2s ease-in-out 2s infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+
+/* ornament */
+.ornament{display:flex;align-items:center;gap:14px;margin-bottom:36px;width:100%;max-width:280px;}
+.ornament-line{flex:1;height:1px;background:var(--border);}
+.ornament-gem{width:6px;height:6px;background:var(--rose2);transform:rotate(45deg);flex-shrink:0;}
+
+/* section labels */
+.section-eyebrow{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--rose2);margin-bottom:12px;}
+.section-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,9vw,40px);font-weight:300;line-height:1.25;
+  color:var(--ink);margin-bottom:28px;
+}
+.section-heading em{font-style:italic;color:var(--rose2);}
+
+/* ── LETTER ── */
+.letter-wrap{position:relative;width:100%;max-width:360px;}
+.letter-paper{
+  background:linear-gradient(155deg,#1e0f14 0%,#140810 100%);
+  border:1px solid var(--border2);
+  border-radius:2px;padding:40px 32px 36px;
+  position:relative;overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,0.6);
+}
+.letter-paper::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--rose2),transparent);opacity:.7;
+}
+.letter-date{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;text-align:left;}
+.letter-body{
+  font-family:'Cormorant Garamond',serif;
+  font-size:17px;font-weight:300;line-height:1.9;
+  color:var(--ink);text-align:left;
+}
+.letter-body p{margin-bottom:14px;}
+.letter-body p:last-child{margin-bottom:0;}
+.letter-sig{font-family:'Great Vibes',cursive;font-size:28px;color:var(--rose2);text-align:right;margin-top:22px;}
+
+/* ── INTERACTIVE APOLOGY ── */
+#apology-scene{background:transparent;}
+
+.mood-label{
+  font-size:9px;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--rose2);margin-bottom:14px;
+}
+.mood-q{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(22px,7vw,32px);
+  font-weight:300;color:var(--ink);
+  margin-bottom:8px;line-height:1.3;
+}
+.mood-q em{font-style:italic;color:var(--rose2);}
+.mood-sub{
+  font-size:13px;font-weight:300;color:var(--muted);
+  margin-bottom:32px;line-height:1.7;max-width:260px;
+}
+
+/* anger meter */
+.meter-wrap{
+  width:100%;max-width:320px;
+  background:#1e0f14;
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:24px 28px;
+  margin-bottom:28px;
+  position:relative;overflow:hidden;
+}
+.meter-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(196,96,122,0.06),transparent 60%);
+  pointer-events:none;
+}
+.meter-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.meter-track{
+  width:100%;height:6px;
+  background:rgba(232,160,180,0.12);
+  border-radius:3px;overflow:hidden;
+  margin-bottom:10px;
+}
+.meter-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--rose2),var(--rose));
+  transition:width .8s cubic-bezier(.23,1,.32,1);
+  width:85%;
+}
+.meter-labels{
+  display:flex;justify-content:space-between;
+  font-size:10px;color:var(--muted);letter-spacing:0.05em;
+}
+.meter-emoji{
+  font-size:28px;margin:10px 0 4px;
+  transition:all .4s;
+}
+.meter-state{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:15px;
+  color:var(--rose2);min-height:22px;
+  transition:opacity .3s;
+}
+
+/* apology actions */
+.actions-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10px;width:100%;max-width:320px;
+  margin-bottom:20px;
+}
+.act-btn{
+  background:#1e0f14;
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:14px 12px;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:14px;
+  color:var(--ink);cursor:none;
+  transition:border-color .25s,background .25s,transform .15s,opacity .3s;
+  line-height:1.4;
+  position:relative;overflow:hidden;
+}
+.act-btn::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 50%,rgba(196,96,122,0),rgba(196,96,122,0));
+  transition:background .4s;
+}
+.act-btn:hover{border-color:var(--rose2);background:#2a1018;}
+.act-btn:active{transform:scale(0.97);}
+.act-btn.used{opacity:.35;pointer-events:none;}
+.act-btn .act-icon{font-size:20px;display:block;margin-bottom:6px;}
+.act-btn .act-label{font-size:11px;font-family:'Jost',sans-serif;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-top:4px;}
+
+/* forgiveness meter */
+.forgive-track{
+  width:100%;max-width:320px;
+  background:#1e0f14;border:1px solid var(--border);
+  border-radius:2px;padding:20px 24px;
+  margin-bottom:24px;
+}
+.forgive-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.forgive-bar-wrap{
+  width:100%;height:8px;background:rgba(232,160,180,0.1);
+  border-radius:4px;overflow:hidden;margin-bottom:8px;
+}
+.forgive-bar{
+  height:100%;border-radius:4px;
+  background:linear-gradient(90deg,#c4607a,var(--rose2),#fbd8e2);
+  width:0%;
+  transition:width 1s cubic-bezier(.23,1,.32,1);
+  position:relative;
+}
+.forgive-bar::after{
+  content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:12px;height:12px;border-radius:50%;
+  background:var(--rose3);
+  box-shadow:0 0 8px rgba(232,160,180,0.8);
+  opacity:0;transition:opacity .3s;
+}
+.forgive-bar.glowing::after{opacity:1;}
+.forgive-pct{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:300;
+  color:var(--rose2);text-align:right;
+}
+
+/* final yes/no */
+#final-question{display:none;flex-direction:column;align-items:center;gap:0;margin-top:8px;}
+.q-final{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,8vw,36px);
+  font-weight:300;color:var(--ink);
+  margin-bottom:8px;line-height:1.25;
+}
+.q-final em{font-style:italic;color:var(--rose2);}
+.q-sub-final{font-size:13px;color:var(--muted);margin-bottom:32px;line-height:1.7;}
+
+.btn-yes{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--rose);color:white;
+  border:none;border-radius:1px;
+  padding:16px 40px;
+  font-family:'Jost',sans-serif;font-weight:300;font-size:13px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  cursor:none;
+  transition:background .3s,transform .15s,box-shadow .3s;
+  box-shadow:0 0 0 0 rgba(196,96,122,0);
+  position:relative;overflow:hidden;
+  margin-bottom:12px;
+}
+.btn-yes:hover{
+  background:#d4708a;
+  box-shadow:0 8px 40px rgba(196,96,122,0.4);
+  transform:translateY(-2px);
+}
+
+#noZone{position:relative;width:100%;max-width:320px;height:100px;display:flex;align-items:center;justify-content:center;}
+#noBtn{
+  position:absolute;
+  background:transparent;
+  border:1px solid rgba(154,122,130,0.3);
+  color:var(--muted);
+  padding:10px 22px;
+  font-family:'Jost',sans-serif;font-weight:300;
+  font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
+  border-radius:1px;cursor:none;
+  transition:border-color .2s,font-size .3s,padding .3s,opacity .4s;
+  white-space:nowrap;
+}
+
+/* ── AFTERMATH ── */
+#aftermath{
+  display:none;
+  flex-direction:column;align-items:center;gap:16px;
+  animation:blooms .7s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes blooms{from{opacity:0;transform:scale(.75) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.aftermath-title{font-family:'Great Vibes',cursive;font-size:clamp(42px,13vw,60px);color:var(--rose2);line-height:1.1;}
+.aftermath-body{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
+  font-size:18px;color:var(--ink);line-height:1.75;max-width:280px;
+}
+.aftermath-sig{font-family:'Great Vibes',cursive;font-size:26px;color:var(--rose2);margin-top:4px;}
+.heart-burst{font-size:44px;animation:heartPop .5s cubic-bezier(.34,1.56,.64,1) both;}
+@keyframes heartPop{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .85s ease,transform .85s ease;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+
+/* snark */
+#snark{
+  position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:linear-gradient(135deg,#1e0f14,#140810);
+  border:1px solid var(--border2);
+  padding:12px 22px;border-radius:1px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;
+  color:var(--ink);z-index:500;
+  white-space:nowrap;opacity:0;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .4s;
+  pointer-events:none;
+  box-shadow:0 8px 40px rgba(0,0,0,.55);
+}
+#snark.show{transform:translateX(-50%) translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="particles"></canvas>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+<!-- ═══ INTRO ═══ -->
+<section class="scene" id="intro">
+  <p class="intro-line">dari AJ · dengan sepenuh hati</p>
+  <h1 class="intro-name">Catharina</h1>
+  <p class="intro-tagline">Aku tau kata-kata aja nggak cukup — jadi aku bikin ini khusus buat kamu.</p>
+  <div class="scroll-line">
+    <span>baca terus</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- ═══ LETTER ═══ -->
+<section class="scene" id="letter-scene">
+  <div class="ornament reveal"><div class="ornament-line"></div><div class="ornament-gem"></div><div class="ornament-line"></div></div>
+  <p class="section-eyebrow reveal">dari hati yang paling dalam</p>
+  <div class="letter-wrap reveal">
+    <div class="letter-paper">
+      <p class="letter-date">Mei 2026 &ensp;·&ensp; Patna, India</p>
+      <div class="letter-body">
+        <p>Baby girl,</p>
+        <p>Kamu tau nggak sih, betapa bodohnya aku ngerasa sekarang? Udah bikin kamu marah — orang yang paling aku sayang. Beneran deh, nggak ada yang lebih aku sesalin dari ini.</p>
+        <p>Kamu tuh bukan cuma pacar aku. Kamu tuh bagian dari hal-hal yang bikin aku pengen bangun tiap pagi. Jarak yang jauh itu udah berat, dan bukannya bikin segalanya lebih ringan, aku malah nambahin beban. Maafin aku, ya?</p>
+        <p>Aku kangen kamu. Kangen suara kamu. Kangen dimarahin kamu juga, kalau jujur. Tapi yang paling aku mau sekarang adalah kamu tau — kamu selalu jadi prioritas aku, bahkan dari seberang lautan ini.</p>
+      </div>
+      <p class="letter-sig">— AJ 🌸</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INTERACTIVE APOLOGY ═══ -->
+<section class="scene" id="apology-scene">
+  <div class="ornament reveal"><div class="ornament-line"></div><div class="ornament-gem"></div><div class="ornament-line"></div></div>
+
+  <div id="apologyFlow" style="width:100%;display:flex;flex-direction:column;align-items:center;">
+    <p class="mood-label reveal">interaktif · jujur · dari aku</p>
+    <p class="mood-q reveal">Seberapa marah kamu<br><em>sekarang?</em></p>
+    <p class="mood-sub reveal">Bantu aku tau — biar aku bisa berusaha lebih keras.</p>
+
+    <!-- anger meter -->
+    <div class="meter-wrap reveal" id="angerMeter">
+      <p class="meter-title">Tingkat Marahnya</p>
+      <div class="meter-emoji" id="meterEmoji">😤</div>
+      <div class="meter-track"><div class="meter-fill" id="meterFill"></div></div>
+      <div class="meter-labels"><span>Udah lega</span><span>Masih kesel</span><span>Marah banget</span></div>
+      <p class="meter-state" id="meterState">Masih kesel ya sama aku… 🥺</p>
+    </div>
+
+    <!-- forgiveness progress -->
+    <div class="forgive-track reveal" id="forgiveTrack">
+      <p class="forgive-label">Tingkat Dimaafkan</p>
+      <div class="forgive-bar-wrap"><div class="forgive-bar" id="forgiveBar"></div></div>
+      <p class="forgive-pct" id="forgiveNum">0%</p>
+    </div>
+
+    <!-- action buttons -->
+    <p style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;" class="reveal">Pilih satu untuk mengurangi amarahmu</p>
+    <div class="actions-grid reveal" id="actionsGrid">
+      <button class="act-btn" data-val="20" data-snark="Aku bakal inget ini selamanya 🥺" onclick="doAction(this)">
+        <span class="act-icon">💌</span>
+        Baca suratnya lagi
+        <span class="act-label">+20% maaf</span>
+      </button>
+      <button class="act-btn" data-val="18" data-snark="Kamu manis banget sih 🌸" onclick="doAction(this)">
+        <span class="act-icon">🌸</span>
+        Bayangin lagi pelukan kita
+        <span class="act-label">+18% maaf</span>
+      </button>
+      <button class="act-btn" data-val="25" data-snark="Makasih udah percaya lagi… 💕" onclick="doAction(this)">
+        <span class="act-icon">🤝</span>
+        Percaya sama AJ-mu
+        <span class="act-label">+25% maaf</span>
+      </button>
+      <button class="act-btn" data-val="15" data-snark="Ketawa dulu, marah belakangan 😊" onclick="doAction(this)">
+        <span class="act-icon">😂</span>
+        Inget momen lucu kita
+        <span class="act-label">+15% maaf</span>
+      </button>
+      <button class="act-btn" data-val="22" data-snark="Itu sih udah cukup bikin aku luluh 🥹" onclick="doAction(this)">
+        <span class="act-icon">📞</span>
+        Inget kapan kita telponan
+        <span class="act-label">+22% maaf</span>
+      </button>
+      <button class="act-btn" data-val="30" data-snark="Oke fine… kamu yang terbaik 🖤" onclick="doAction(this)">
+        <span class="act-icon">🌙</span>
+        Akui AJ emang lucu
+        <span class="act-label">+30% maaf</span>
+      </button>
+    </div>
+
+    <!-- final question appears after enough progress -->
+    <div id="final-question">
+      <p class="q-final">Jadi…<br><em>udah mau maafin aku?</em></p>
+      <p class="q-sub-final">Aku janji nggak kemana-mana. 🌸</p>
+      <button class="btn-yes" id="yesBtn">Iya, aku maafin kamu 💕</button>
+      <div id="noZone"><button id="noBtn" data-tries="0">Belum deh</button></div>
+    </div>
+  </div>
+
+  <!-- aftermath -->
+  <div id="aftermath">
+    <div class="heart-burst">🌸</div>
+    <p class="aftermath-title">Makasih, Babe.</p>
+    <p class="aftermath-body">Kamu nggak tau betapa berartinya ini buat aku. Aku sayang kamu — lebih dari yang bisa aku ungkapin. Selalu.</p>
+    <p class="aftermath-sig">— AJ, selalu punyamu 🖤</p>
+    <a id="waBtn" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:10px;margin-top:8px;background:transparent;border:1px solid rgba(232,160,180,0.4);border-radius:1px;padding:13px 28px;font-family:'Jost',sans-serif;font-weight:300;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--rose2);text-decoration:none;transition:border-color .25s,background .25s;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Kasih tau AJ sekarang
+    </a>
+  </div>
+</section>
+
+<div id="snark"></div>
+
+<script>
+// cursor
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('button,a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+});
+
+// particles
+const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
+let W,H,pts=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+function mkP(){return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.3,vx:(Math.random()-.5)*.15,vy:-(Math.random()*.2+.05),a:Math.random()*.5+.1,life:Math.random()};}
+for(let i=0;i<80;i++)pts.push(mkP());
+(function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.life+=.003;if(p.life>1||p.y<-10){Object.assign(p,mkP());p.y=H+10;}const a=p.a*Math.sin(p.life*Math.PI);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,160,180,${a})`;ctx.fill();});requestAnimationFrame(draw);})();
+
+// reveal
+const revs=document.querySelectorAll('.reveal');
+const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);}});},{threshold:.1});
+revs.forEach(el=>ro.observe(el));
+
+// snark
+const snarkEl=document.getElementById('snark');
+function showSnark(msg){snarkEl.textContent=msg;snarkEl.classList.add('show');clearTimeout(snarkEl._t);snarkEl._t=setTimeout(()=>snarkEl.classList.remove('show'),3400);}
+
+// ── ANGER / FORGIVE METER ──
+let angerPct=85; // starts high
+let forgivePct=0;
+let actionsUsed=0;
+const totalActions=6;
+
+const meterFill=document.getElementById('meterFill');
+const meterEmoji=document.getElementById('meterEmoji');
+const meterState=document.getElementById('meterState');
+const forgiveBar=document.getElementById('forgiveBar');
+const forgiveNum=document.getElementById('forgiveNum');
+
+const angerStates=[
+  {max:15, emoji:'😊', state:'Kamu udah luluh… 💕', fill:'15%'},
+  {max:30, emoji:'🥺', state:'Masih sedikit kesel ya…', fill:'28%'},
+  {max:50, emoji:'😕', state:'Lumayan lah… aku usaha terus', fill:'48%'},
+  {max:70, emoji:'😤', state:'Masih kesel ya sama aku… 🥺', fill:'65%'},
+  {max:100, emoji:'😠', state:'Marah banget nih… aku minta maaf 😔', fill:'85%'},
+];
+
+function updateMeters(){
+  // anger
+  const state=angerStates.find(s=>angerPct<=s.max)||angerStates[angerStates.length-1];
+  meterFill.style.width=Math.max(5,angerPct)+'%';
+  meterEmoji.textContent=state.emoji;
+  meterState.textContent=state.state;
+  // forgive
+  forgiveBar.style.width=forgivePct+'%';
+  forgiveNum.textContent=Math.round(forgivePct)+'%';
+  if(forgivePct>10) forgiveBar.classList.add('glowing');
+  // show final question when enough
+  if(forgivePct>=70 && document.getElementById('final-question').style.display==='none'){
+    setTimeout(()=>{
+      const fq=document.getElementById('final-question');
+      fq.style.display='flex';
+      fq.style.flexDirection='column';
+      fq.style.alignItems='center';
+      fq.style.animation='fadeUp .8s ease forwards';
+      showSnark('Udah 70%… gimana? 🌸');
+      // init no button position
+      setTimeout(()=>{
+        const z=document.getElementById('noZone');
+        const nb=document.getElementById('noBtn');
+        nb.style.left=(z.offsetWidth/2-nb.offsetWidth/2)+'px';
+        nb.style.top=(z.offsetHeight/2-nb.offsetHeight/2)+'px';
+      },100);
+    },600);
+  }
+}
+updateMeters();
+
+function doAction(btn){
+  const val=parseInt(btn.getAttribute('data-val'));
+  const snarkMsg=btn.getAttribute('data-snark');
+  btn.classList.add('used');
+  actionsUsed++;
+  // reduce anger
+  angerPct=Math.max(0,angerPct-val*0.7);
+  // increase forgive
+  forgivePct=Math.min(100,forgivePct+val);
+  updateMeters();
+  showSnark(snarkMsg);
+  // if all used and not yet 70, still bump
+  if(actionsUsed===totalActions && forgivePct<70){
+    forgivePct=72;
+    angerPct=20;
+    updateMeters();
+  }
+}
+
+// ── NO BUTTON ──
+const noLabels=['Belum deh','Hmm… masih belum','Coba lagi 😤','Nggak mau!','…'];
+const noSnarks=[
+  'Tombolnya kabur terus lho 👀',
+  'Aku sabar kok, nunggu kamu…',
+  'Tombolnya makin kecil, perhatiin 😏',
+  'Oke fine, aku nunggu selamanya kalau perlu 🥺',
+];
+let noTries=0,snarkIdx=0;
+const noBtn=document.getElementById('noBtn');
+const noZone=document.getElementById('noZone');
+
+function isMobile(){return innerWidth<700;}
+
+function moveNo(){
+  const zw=noZone.offsetWidth,zh=noZone.offsetHeight;
+  const bw=noBtn.offsetWidth,bh=noBtn.offsetHeight;
+  const m=12;
+  noBtn.style.left=(m+Math.random()*(zw-bw-m*2))+'px';
+  noBtn.style.top=(m+Math.random()*(zh-bh-m*2))+'px';
+}
+
+noBtn.addEventListener('mouseenter',()=>{
+  if(isMobile())return;
+  noTries++;
+  noBtn.setAttribute('data-tries',Math.min(noTries,4));
+  if(noTries<noLabels.length) noBtn.textContent=noLabels[noTries];
+  moveNo();
+  if(snarkIdx<noSnarks.length) showSnark(noSnarks[snarkIdx++]);
+});
+noBtn.addEventListener('click',()=>{
+  if(!isMobile())return;
+  noTries++;
+  noBtn.setAttribute('data-tries',Math.min(noTries,4));
+  if(noTries<noLabels.length) noBtn.textContent=noLabels[noTries];
+  if(snarkIdx<noSnarks.length) showSnark(noSnarks[snarkIdx++]);
+  if(noTries>=4){noBtn.style.opacity='0';setTimeout(()=>noBtn.style.display='none',500);}
+});
+// shrink styles
+const noCss=document.createElement('style');
+noCss.textContent=`
+#noBtn[data-tries="1"]{font-size:11px;padding:8px 18px;}
+#noBtn[data-tries="2"]{font-size:10px;padding:6px 14px;opacity:.75;}
+#noBtn[data-tries="3"]{font-size:9px;padding:5px 10px;opacity:.5;}
+#noBtn[data-tries="4"]{font-size:8px;padding:3px 8px;opacity:.3;}
+`;
+document.head.appendChild(noCss);
+
+
+const AJ_WA_NUMBER = '917667849304';
+const WA_MESSAGE = encodeURIComponent('Iya, i forgive you 💕🌸');
+document.getElementById('waBtn').href = `https://wa.me/${AJ_WA_NUMBER}?text=${WA_MESSAGE}`;
+
+// ── MILESTONES ──
+const milestones = {25: false, 50: false, 70: false, 100: false};
+function checkMilestones(){
+  if(forgivePct>=25 && !milestones[25]){ milestones[25]=true; showMilestone(25); }
+  if(forgivePct>=50 && !milestones[50]){ milestones[50]=true; showMilestone(50); }
+  if(forgivePct>=70 && !milestones[70]){ milestones[70]=true; showMilestone(70); }
+}
+function showMilestone(pct){
+  const msgs = {
+    25: '💌 Dia udah mulai luluh sedikit…',
+    50: '🌸 Setengah jalan — dia lagi melunak!',
+    70: '💕 70%! Final question muncul sekarang…',
+  };
+  // show a special gold milestone toast
+  const m = document.createElement('div');
+  m.textContent = msgs[pct] || '';
+  m.style.cssText=`position:fixed;top:28px;left:50%;transform:translateX(-50%) translateY(-80px);background:linear-gradient(135deg,#1e0f14,#2a0f18);border:1px solid rgba(232,160,180,0.45);padding:12px 22px;border-radius:1px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--ink,#f5eaed);z-index:600;white-space:nowrap;opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .4s;pointer-events:none;box-shadow:0 8px 40px rgba(0,0,0,.55);`;
+  document.body.appendChild(m);
+  requestAnimationFrame(()=>{
+    m.style.transform='translateX(-50%) translateY(0)';
+    m.style.opacity='1';
+  });
+  setTimeout(()=>{
+    m.style.transform='translateX(-50%) translateY(-80px)';
+    m.style.opacity='0';
+    setTimeout(()=>m.remove(),500);
+  },3600);
+}
+
+// ── YES ──
+document.getElementById('yesBtn').onclick=()=>{
+  document.getElementById('apologyFlow').style.display='none';
+  const af=document.getElementById('aftermath');
+  af.style.display='flex';
+  burst(70);
+  // update WA link one more time just in case
+  document.getElementById('waBtn').href=`https://wa.me/${AJ_WA_NUMBER}?text=${WA_MESSAGE}`;
+};
+
+function burst(n){
+  const g=['🌸','💕','✦','·','❀','🌷','✿','🖤'];
+  for(let i=0;i<n;i++){
+    setTimeout(()=>{
+      const p=document.createElement('div');
+      const rot=Math.random()>0.5?'':`-`;
+      p.style.cssText=`position:fixed;z-index:800;pointer-events:none;font-size:${13+Math.random()*18}px;left:${10+Math.random()*80}%;top:100%;`;
+      p.textContent=g[Math.floor(Math.random()*g.length)];
+      const kf=`rise${Date.now()+i}`;
+      const s=document.createElement('style');
+      s.textContent=`@keyframes ${kf}{0%{transform:translateY(0) rotate(0deg);opacity:0;}10%{opacity:1;}90%{opacity:.6;}100%{transform:translateY(-110vh) rotate(${rot}${180+Math.round(Math.random()*180)}deg);opacity:0;}}`;
+      document.head.appendChild(s);
+      p.style.animation=`${kf} ${2+Math.random()*2.5}s ease forwards`;
+      document.body.appendChild(p);
+      setTimeout(()=>{p.remove();s.remove();},5000);
+    },Math.random()*1000);
+  }
+}
+</script>
+</body>
+</html>
