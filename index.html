@@ -527,32 +527,64 @@ const angerStates=[
 ];
 
 function updateMeters(){
+
   // anger
-  const state=angerStates.find(s=>angerPct<=s.max)||angerStates[angerStates.length-1];
-  meterFill.style.width=Math.max(5,angerPct)+'%';
-  meterEmoji.textContent=state.emoji;
-  meterState.textContent=state.state;
+  const state =
+    angerStates.find(s => angerPct <= s.max)
+    || angerStates[angerStates.length - 1];
+
+  meterFill.style.width = Math.max(5, angerPct) + '%';
+
+  meterEmoji.textContent = state.emoji;
+
+  meterState.textContent = state.state;
+
+
   // forgive
-  forgiveBar.style.width=forgivePct+'%';
-  forgiveNum.textContent=Math.round(forgivePct)+'%';
-  if(forgivePct>10) forgiveBar.classList.add('glowing');
-  // show final question when enough
-  if(forgivePct>=70 && document.getElementById('final-question').style.display==='none'){
+  forgiveBar.style.width = forgivePct + '%';
+
+  forgiveNum.textContent =
+    Math.round(forgivePct) + '%';
+
+  if(forgivePct > 10){
+    forgiveBar.classList.add('glowing');
+  }
+
+
+  // SHOW FINAL QUESTION
+  const fq = document.getElementById('final-question');
+
+  if(forgivePct >= 70 && fq.style.display !== 'flex'){
+
     setTimeout(()=>{
-      const fq=document.getElementById('final-question');
-      fq.style.display='flex';
-      fq.style.flexDirection='column';
-      fq.style.alignItems='center';
-      fq.style.animation='fadeUp .8s ease forwards';
+
+      fq.style.display = 'flex';
+
+      fq.style.flexDirection = 'column';
+
+      fq.style.alignItems = 'center';
+
+      fq.style.animation =
+        'fadeUp .8s ease forwards';
+
       showSnark('Udah 70%… gimana? 🌸');
-      // init no button position
+
+      // center NO button
       setTimeout(()=>{
+
         const z=document.getElementById('noZone');
+
         const nb=document.getElementById('noBtn');
-        nb.style.left=(z.offsetWidth/2-nb.offsetWidth/2)+'px';
-        nb.style.top=(z.offsetHeight/2-nb.offsetHeight/2)+'px';
+
+        nb.style.left =
+          (z.offsetWidth/2 - nb.offsetWidth/2)+'px';
+
+        nb.style.top =
+          (z.offsetHeight/2 - nb.offsetHeight/2)+'px';
+
       },100);
-    },600);
+
+    },500);
   }
 }
 updateMeters();
